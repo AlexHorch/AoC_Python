@@ -12,6 +12,7 @@ def nth_word_each_line(txt, n):
 def place_names(txt):
     return sorted(set(nth_word_each_line(txt, 0) + nth_word_each_line(txt, 2)))
 
+
 places = {}
 for line in txt.split("\n"):
     words = line.split(" ")
@@ -19,13 +20,14 @@ for line in txt.split("\n"):
     b = words[2]
     d = int(words[4])
     if a not in places.keys():
-        places[a]={}
-    places[a][b]=d
+        places[a] = {}
+    places[a][b] = d
     if b not in places.keys():
-        places[b]={}
-    places[b][a]=d
+        places[b] = {}
+    places[b][a] = d
 
 print(places)
+
 
 def shortest(visited):
     global places
@@ -38,6 +40,8 @@ def shortest(visited):
         distance = places[visited[-1]][name] + shortest(visited + [name])
         if distance < m:
             m = distance
+    print(distance)
     return distance
+
 
 print(shortest([]))
