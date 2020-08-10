@@ -37,16 +37,22 @@ winner = max([to_reindeer(txt).distance(time) for txt in text.split("\n")])
 
 print(winner)
 
-reindeers = {line.split(" ")[0]: to_reindeer(line)
-             for line in text.split("\n")}
 
-scores = {it: 0 for it in reindeers.keys()}
+def reindeers(text):
+    return {line.split(" ")[0]: to_reindeer(line) for line in text.split("\n")}
 
 
-for i in range(2503):
-    m = max([r.distance(i+1) for r in reindeers.values()])
-    for v in reindeers.values():
-        if v.distance(i+1) == m:
-            scores[v.name] += 1
+rs = reindeers(text)
 
-print(scores)
+
+def scores(reindeers, time):
+    s = {it: 0 for it in reindeers.keys()}
+    for i in range(time):
+        m = max([r.distance(i+1) for r in reindeers.values()])
+        for v in reindeers.values():
+            if v.distance(i+1) == m:
+                s[v.name] += 1
+    return s
+
+
+print(scores(rs, time))
