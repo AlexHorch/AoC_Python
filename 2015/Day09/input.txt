@@ -1,4 +1,4 @@
-txt = """Tristram to AlphaCentauri = 34
+Tristram to AlphaCentauri = 34
 Tristram to Snowdin = 100
 Tristram to Tambi = 63
 Tristram to Faerun = 108
@@ -25,10 +25,4 @@ Faerun to Straylight = 66
 Faerun to Arbre = 144
 Norrath to Straylight = 115
 Norrath to Arbre = 135
-Straylight to Arbre = 127"""
-
-example = """London to Dublin = 464
-London to Belfast = 518
-Dublin to Belfast = 141"""
-
-example_result = 605
+Straylight to Arbre = 127
