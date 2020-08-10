@@ -1,14 +1,3 @@
-examples = r"""
-""
-"abc"
-"aaa\"aaa"
-"\x27"
-"""
-
-lit = [2, 5, 10, 6]
-act = [0, 3, 7, 1]
-
-text = """
 "azlgxdbljwygyttzkfwuxv"
 "v\xfb\"lgs\"kvjfywmut\x9cr"
 "merxdhj"
@@ -309,4 +298,3 @@ text = """
 "hjg\\w\"\x78uoqbsdikbjxpip\"w\"jnhzec"
 "gk"
 "\\zrs\\syur"
-"""

@@ -1,31 +1,26 @@
-from puzzle_input import text, examples, lit, act
+with open("input.txt", "r") as file:
+    text = file.read().split("\n")
 
 
-def actual_len(text):
-    copy = text[:]
-    idx = copy.find(r"\x")
-    while idx > 0:        
-        copy = copy[:idx] + copy[idx+4:]
-        idx = copy.find(r"\x")
-    idx = copy.find(r"\\")
-    while idx > 0:
-        copy = copy[:idx] + copy[idx+2:]
-        idx = copy.find(r"\\")
-    idx = copy.find(r"\"")
-    while idx > 0:
-        copy = copy[:idx] + copy[idx+2:]
-        idx = copy.find(r"\"")
-    return len(copy)
+def mem_len(text):
+    return len(eval(text))
 
 
-x = """
-"d\\gkbqo\\fwukyxab\"u"
-""".split("\n")[1:-1]
+def code_len(text):
+    return len(text)
 
-total = 0
 
-for i in range(len(x)):
-    total += len(x[i])
-    total -= actual_len(x[i])
+def rep_len(text):
+    return len(repr(text)) + text.count('"')
 
-print(total)
+
+def diff1(text):
+    return sum([code_len(line) - mem_len(line) for line in text])
+
+
+def diff2(text):
+    return sum([rep_len(line) - code_len(line) for line in text])
+
+
+print(diff1(text))
+print(diff2(text))
