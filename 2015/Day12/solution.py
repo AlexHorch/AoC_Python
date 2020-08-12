@@ -1,5 +1,7 @@
 import json
-from puzzle_input import puzzle_input
+
+with open("input.txt", "r") as file:
+    puzzle_input = file.read().split("\n")
 
 puzzle_json = json.loads(puzzle_input)
 
@@ -39,6 +41,7 @@ def numeric_value(txt):
             sum += int(txt[start:idx+1])
         idx += 1
     return sum
+
 
 print(numeric_value(puzzle_input))
 print(value_of(puzzle_json))
