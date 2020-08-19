@@ -1,15 +1,5 @@
+import math
 target = 36000000
-
-
-def presents(house, primes):
-    x = (house + 1) * 10
-    ps = (prime for prime in primes if prime < house)
-    for prime in ps:
-        y = house
-        while y % prime == 0:
-            x += 
-
-    return sum([i*10 for i in range(house) if i > 0 and house % i == 0])
 
 
 def primes(n):
@@ -23,3 +13,32 @@ def primes(n):
         if p:
             ps.append(i+3)
     return ps
+
+
+def prime_factorization(n, primes):
+    factors = []
+    for prime in primes:
+        if prime > n:
+            break
+        while n % prime == 0:
+            factors.append(prime)
+            n /= prime
+    return factors
+
+
+def permutations(length):
+    if length == 1:
+        yield (0,)
+        yield (1,)
+    else:
+        for value in [0, 1]:
+            for permutation in permutations(length-1):
+                yield (value,) + permutation
+
+
+def presents(house, primes):
+    total = 10
+    factors = prime_factorization(house, primes)
+    perms = permutations(len(factors))
+    for perm in perms:
+        total += math.prod([factors[i] for i in range(len(perm)) if perm[i]==1]) * 10
