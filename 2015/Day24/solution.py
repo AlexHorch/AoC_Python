@@ -4,18 +4,30 @@ with open("input.txt", "r") as file:
 
 def permutations(prev, idx, packages, goal):
     if prev == goal:
-        return ()
+        yield ()
     for i in range(idx, len(packages)):
         n = packages[i]
         if prev + n <= goal:
-            yield (n,) + permutations(prev + n, i, packages,  goal)
+            for p in permutations(prev + n, i+1, packages,  goal):
+                yield (n,) + p
 
 
 def combinations(packages):
-    goal = sum(packages) // 3
-    x = set([sorted(p) for p in permutations(0, 0, packages,  goal)])
+    goal = sum(packages) // 4
+    x = set([p for p in permutations(0, 0, packages,  goal)])
     return x
 
 
-for c in combinations([1, 2, 3, 4, 5]):
-    print(list(c))
+count = 28
+qe = 10000000000000000
+
+for c in combinations(packages):
+    if len(c) <= count:
+        count = len(c)
+        q = 1
+        for x in c:
+            q *= x
+        if q <= qe:
+            qe = q
+
+print(count, qe)
