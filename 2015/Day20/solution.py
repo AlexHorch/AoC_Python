@@ -27,13 +27,12 @@ def prime_factorization(n, primes):
 
 
 def permutations(length):
-    if length == 1:
-        yield (0,)
-        yield (1,)
-    else:
+    if length > 0:
         for value in [0, 1]:
             for permutation in permutations(length-1):
                 yield (value,) + permutation
+    else:
+        yield ()
 
 
 def presents(house, primes):
@@ -41,4 +40,9 @@ def presents(house, primes):
     factors = prime_factorization(house, primes)
     perms = permutations(len(factors))
     for perm in perms:
-        total += math.prod([factors[i] for i in range(len(perm)) if perm[i]==1]) * 10
+        total += math.prod([factors[i]
+                            for i in range(len(perm)) if perm[i] == 1]) * 10
+    return total
+
+
+print(len(list(permutations(3))))
