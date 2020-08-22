@@ -1,20 +1,21 @@
 import math
 import unittest
-from solution import primes, prime_factorization, presents, permutations
+from solution import primes_to, prime_factorization, presents, permutations
 
-ps = primes(int(math.sqrt(36000000))+1)
+ps = primes_to(int(math.sqrt(36000000))+1)
 
 
 class TestSolution(unittest.TestCase):
     def test_primes_10(self):
-        self.assertListEqual([2, 3, 5, 7], primes(10))
+        self.assertListEqual([2, 3, 5, 7], primes_to(10))
 
     def test_primes_5(self):
-        self.assertListEqual([2, 3, 5], primes(5))
+        self.assertListEqual([2, 3, 5], primes_to(5))
 
     def test_prime_factorization_primes(self):
         self.assertListEqual([], prime_factorization(1, ps))
         self.assertListEqual([2], prime_factorization(2, ps))
+        self.assertListEqual([2, 2], prime_factorization(4, ps))
         self.assertListEqual([5], prime_factorization(5, ps))
         self.assertListEqual([11], prime_factorization(11, ps))
 
@@ -25,8 +26,10 @@ class TestSolution(unittest.TestCase):
         self.assertListEqual([2, 2, 3, 3, 5], prime_factorization(180, ps))
 
     def test_permutations(self):
-        self.assertCountEqual([(0,),(1,) ],permutations(1))
-        self.assertCountEqual([], permutations(0))
+        self.assertCountEqual([(0,), (1,)], permutations(1))
+        self.assertCountEqual(
+            [(0, 0,), (0, 1,), (1, 0,), (1, 1,)], permutations(2))
+        self.assertCountEqual([()], permutations(0))
 
     def test_presents(self):
         self.assertEqual(10, presents(1, ps))

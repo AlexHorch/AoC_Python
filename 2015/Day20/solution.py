@@ -2,16 +2,16 @@ import math
 target = 36000000
 
 
-def primes(n):
+def primes_to(n):
     ps = [2]
-    for i in range(n-2):
+    for i in range(3, n+1):
         p = True
         for prime in ps:
-            if (i+3) % prime == 0:
+            if i % prime == 0:
                 p = False
                 break
         if p:
-            ps.append(i+3)
+            ps.append(i)
     return ps
 
 
@@ -36,13 +36,10 @@ def permutations(length):
 
 
 def presents(house, primes):
-    total = 10
+    total = 0
     factors = prime_factorization(house, primes)
     perms = permutations(len(factors))
-    for perm in perms:
-        total += math.prod([factors[i]
-                            for i in range(len(perm)) if perm[i] == 1]) * 10
-    return total
+    return sum(set([math.prod([factors[i] * perm[i] + (not perm[i]) for i in range(len(perm))]) for perm in perms]))*10
 
 
-print(len(list(permutations(3))))
+print(presents(40320, primes_to(40320)))
